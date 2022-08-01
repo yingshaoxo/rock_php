@@ -3,6 +3,10 @@
 .DS_Store
 Icon
 
+WWW/error
+
+WWW/wordpress
+
 ##### Windows
 # Windows thumbnail cache files
 Thumbs.db
