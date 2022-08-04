@@ -3,7 +3,8 @@
 
 <head>
   <meta charset="utf-8" />
-  <title>GeekLand</title>
+  <!-- <title>GeekLand</title> -->
+  <title>Test</title>
   <meta name="keywords" content="" />
   <meta name="description" content="" />
   <meta name="renderer" content="webkit" />
@@ -16,49 +17,11 @@
   <meta http-equiv="Cache-Control" content="no-store, must-revalidate" />
   <meta http-equiv="expires" content="Wed, 26 Feb 1997 08:21:57 GMT" />
   <meta http-equiv="expires" content="0" />
-  <style>
-    body {
-      font: 16px arial, "Microsoft Yahei", "Hiragino Sans GB", sans-serif;
-    }
 
-    h1 {
-      margin: 0;
-      color: #3a87ad;
-      font-size: 26px;
-    }
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
-    .content {
-      width: 45%;
-      margin: 0 auto;
-    }
-
-    .content>div {
-      margin-top: 200px;
-      padding: 20px;
-      background: #d9edf7;
-      border-radius: 12px;
-    }
-
-    .content dl {
-      color: #2d6a88;
-      line-height: 40px;
-    }
-
-    .content div div {
-      padding-bottom: 20px;
-      text-align: center;
-    }
-  </style>
-</head>
-
-<body>
-  <div class="content">
-    <div>
-      <h1>站点创建成功</h1>
-      <p>This is the website created by yingshaoxo!</p>
-    </div>
-  </div>
-</body>
+<body></body>
 
 </html>
 
