@@ -3,7 +3,7 @@
 
 <head>
     <title>SignUP</title>
-    <?php include 'base/head.php'; ?>
+    <?php include_once 'base/head.php'; ?>
 </head>
 
 <script>
@@ -33,9 +33,7 @@
 </html>
 
 <?php
-include 'base/database.php';
-include 'base/functions.php';
-include 'functions/user.php';
+include_once 'init.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (!empty($_POST['username']) && !empty($_POST['password'])) {

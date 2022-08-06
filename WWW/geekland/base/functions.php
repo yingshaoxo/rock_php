@@ -1,14 +1,13 @@
 
 
 <?php
-function route_to($url)
+function alert($msg, $route_to = null)
 {
-    header('Location: ' . $url);
-}
-
-function alert($msg)
-{
-    echo "<script type='text/javascript'>alert(`$msg`);</script>";
+    if (is_null($route_to)) {
+        echo "<script type='text/javascript'>alert(`$msg`);</script>";
+    } else {
+        echo "<script type='text/javascript'>alert(`$msg`); route_to('$route_to');</script>";
+    }
 }
 
 function console_log($msg)

@@ -3,7 +3,7 @@
 
 <head>
     <title>Login</title>
-    <?php include 'base/head.php'; ?>
+    <?php include_once 'base/head.php'; ?>
 </head>
 
 <script>
@@ -59,9 +59,7 @@
 </html>
 
 <?php
-include 'base/database.php';
-include 'base/functions.php';
-include 'functions/user.php';
+include_once 'init.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (!empty($_POST['username']) && !empty($_POST['password'])) {
@@ -73,6 +71,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if (login_verify($username, $password)) {
+        // save username and password to cookie, so next time, it will auto login
+        $expire_time = time() + (86400 * 30); // 86400 = 1 day, so 30 days
+        setcookie("username", $username, $expire_time, "/"); // 86400 = 1 day
+        setcookie("password", $password, $expire_time, "/"); // 86400 = 1 day
+
         route_to('./home_page.php');
     } else {
         alert("Login Failed!\n\nTry again or do an registion for a new account.");
