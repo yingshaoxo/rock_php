@@ -1,0 +1,13 @@
+{
+  "name": "app",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "build": "cd vue_source_code && npm install && npm run build && rm -Rf ../vue/ && mkdir -p ../vue/ && cp -R dist/* ../vue/",
+    "dev": "cd vue_source_code && npm install && npm run dev"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+  }
+}

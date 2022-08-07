@@ -1,5 +1,5 @@
 
 <?php
-header('Location: /geekland');
+header('Location: /geekland/php/index');
 exit;
 ?>
