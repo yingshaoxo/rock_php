@@ -1,9 +1,34 @@
 import { reactive, ref } from "vue";
+import { notification } from "ant-design-vue";
 
 export const super_store = {
-  css: {},
   functions: {},
   pages: {},
+  show: {
+    message: (msg: string) => {
+      notification.open({
+        message: "Info",
+        description: msg,
+        onClick: () => {
+          console.log(msg);
+        },
+      });
+    },
+    error: (msg: string) => {
+      notification.open({
+        message: "Error",
+        description: msg,
+        style: {
+          width: "600px",
+          marginLeft: `${335 - 600}px`,
+        },
+        class: "notification-custom-class",
+        onClick: () => {
+          console.log(msg);
+        },
+      });
+    },
+  },
   basic: {
     jsonToObj(json: string) {
       return JSON.parse(json);

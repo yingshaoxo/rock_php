@@ -91,9 +91,9 @@ function add_money_to_user($username, $quantity)
         return false;
     } else {
         try {
-            // if (is_null($user->money)) {
-            //     $user->money = 0;
-            // }
+            if (is_string($quantity)) {
+                $quantity = intval($quantity);
+            }
             $user->money = $user->money + $quantity;
             R::store($user);
             return true;

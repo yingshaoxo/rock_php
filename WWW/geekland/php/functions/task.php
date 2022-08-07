@@ -23,7 +23,23 @@ function get_a_task($task_type, $username)
     }
 }
 
-function get_task_list_as_json($task_type = null)
+
+function get_a_task_by_id($id)
+{
+    $data = array(
+        'id' => $id,
+    );
+
+    $task = R::findOne('task', "id = :id", $data);
+
+    if (empty($task)) {
+        return null;
+    } else {
+        return $task;
+    }
+}
+
+function get_task_list($task_type = null)
 {
     $status = "waiting";
     if (is_null($task_type)) {
@@ -35,9 +51,9 @@ function get_task_list_as_json($task_type = null)
     // $tasks = R::findAll('task');
 
     if (empty($tasks)) {
-        return json_encode([]);
+        return [];
     } else {
-        return json_encode($tasks);
+        return $tasks;
     }
 }
 
@@ -61,14 +77,25 @@ function add_non_duplicate_task($task_type, $task_paramaters, $username)
     }
 }
 
-function finish_a_task($task_type, $username)
+function finish_a_task($id)
 {
-    $task_we_found = get_a_task($task_type, $username);
+    $task_we_found = get_a_task_by_id($id);
     if ($task_we_found == null) {
         return false;
     } else {
         $task_we_found->status = 'done';
         R::store($task_we_found);
+        return true;
+    }
+}
+
+function delete_a_task($id)
+{
+    $task_we_found = get_a_task_by_id($id);
+    if ($task_we_found != null) {
+        return false;
+    } else {
+        R::trash($task_we_found);
         return true;
     }
 }

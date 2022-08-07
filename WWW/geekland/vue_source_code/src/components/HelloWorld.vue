@@ -12,12 +12,11 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div
-    class="w-screen h-screen flex flex-col justify-center content-center text-center"
-  >
-    <div>Hello World</div>
-    <div class="mt-10">{{ data.task_list }}</div>
+  <div class="w-screen h-screen flex flex-col justify-center content-center text-center">
+    <div>GeekLand</div>
+    <!-- <div class="mt-10">{{ data.task_list }}</div> -->
   </div>
 </template>
 
-<style></style>
+<style>
+</style>
