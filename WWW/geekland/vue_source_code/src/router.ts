@@ -1,30 +1,30 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
 import HelloWorld from "./components/HelloWorld.vue";
+
 import Admin from "./pages/admin.vue";
-import php_containerVue from "./pages/php_container.vue";
-import PhpContainer from "./pages/php_container.vue";
+import Home from "./pages/home.vue";
 
 export const routesMap = {
-  home: "/",
+  entrie: "/",
+  home: "/home",
   admin: "/admin",
-  php: "/php",
 };
 
 const routes: Array<RouteRecordRaw> = [
   {
+    path: routesMap.entrie,
+    name: "entrie",
+    component: HelloWorld,
+  },
+  {
     path: routesMap.home,
     name: "home",
-    component: HelloWorld,
+    component: Home,
   },
   {
     path: routesMap.admin,
     name: "admin",
     component: Admin,
-  },
-  {
-    path: routesMap.php,
-    name: "php",
-    component: PhpContainer,
   },
 ];
 

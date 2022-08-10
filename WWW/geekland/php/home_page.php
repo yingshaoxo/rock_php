@@ -7,27 +7,11 @@
 </head>
 
 <body>
-
-    <div id="app">
-        <div class="w-100 h-screen flex flex-row justify-center">
-            <div class="flex flex-column justify-center">Welcome Home!</div>
-        </div>
-    </div>
-
+    <iframe src="/geekland/vue/#home" style="width:100vw; height:100vh">
+    </iframe>
 </body>
 
 <script>
-    const {
-        createApp
-    } = Vue
-
-    createApp({
-        data() {
-            return {
-                // message: 'Hello Vue!'
-            }
-        }
-    }).mount('#app')
 </script>
 
 </html>
@@ -35,5 +19,5 @@
 <?php
 include_once 'init.php';
 
-route_control();
+route_control(true);
 ?>
