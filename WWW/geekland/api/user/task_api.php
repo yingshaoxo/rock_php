@@ -1,6 +1,6 @@
-
 <?php
 include_once '../../php/init.php';
+include_once '../auth_gate.php';
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -50,4 +50,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 }
-?>
