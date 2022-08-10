@@ -1,4 +1,3 @@
-
 <?php
 include_once 'user.php';
 
@@ -14,7 +13,7 @@ function route_to($url)
     header('Location: ' . $url);
 }
 
-function route_control()
+function route_control($auth_only = false)
 {
     $cookie_username = "username";
     $cookie_password = "password";
@@ -35,7 +34,9 @@ function route_control()
                 route_to('./deposit_page.php');
                 return;
             } else {
-                route_to('./home_page.php');
+                if (!$auth_only) {
+                    route_to('./home_page.php');
+                }
             }
         } else {
             // password wrong, redirect to login page
@@ -43,4 +44,3 @@ function route_control()
         }
     }
 }
-?>

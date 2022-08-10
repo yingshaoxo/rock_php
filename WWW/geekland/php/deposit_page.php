@@ -14,7 +14,8 @@
         <form class="basis-1/2 mt-20" action='deposit_page.php' method='POST'>
             <div class="form-group">
                 <label>Deposit Money Quantity</label>
-                <input type="text" class="form-control" name="money_quantity" aria-describedby="emailHelp" placeholder="" value="100">
+                <input type="text" class="form-control" name="money_quantity" aria-describedby="emailHelp"
+                    placeholder="" value="100">
             </div>
             <div class="form-group mt-4">
                 <label>Proof(Transferring ID)</label>
@@ -35,7 +36,7 @@
 <?php
 include_once 'init.php';
 
-route_control();
+route_control(true);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (!empty($_POST['money_quantity']) && !empty($_POST['transferring_id'])) {
