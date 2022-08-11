@@ -1,4 +1,3 @@
-
 <?php
 function login_verify($username, $password)
 {
@@ -19,6 +18,16 @@ function login_verify($username, $password)
     }
 }
 
+function does_user_exists($username)
+{
+    $user = R::findOne('user', 'username = :username', array('username' => $username));
+
+    if (!empty($user)) {
+        return true;
+    } else {
+        return false;
+    }
+}
 
 function user_register($username, $password)
 {
@@ -103,4 +112,3 @@ function add_money_to_user($username, $quantity)
         }
     }
 }
-?>

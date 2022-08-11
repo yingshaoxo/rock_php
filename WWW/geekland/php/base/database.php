@@ -1,7 +1,22 @@
-
 <?php
 require 'rb-mysql.php';
 R::setup('mysql:host=localhost;dbname=geekland', 'root', 'root');
+
+function get_sql_offset_and_limit_command_by_using_pagesize_and_pagenum($page_size, $page_num)
+{
+    // 20
+    // 0: 20*(-1) - 20*0
+    // 1: 20*0-20*1
+    // 2: 20*1-40*2
+    // 3: 20*2-60*3
+    if (($page_size <= 0) || ($page_num <= 0)) {
+        return " ;";
+    }
+    if (is_null($page_size) || is_null($page_num)) {
+        return " ;";
+    }
+    return sprintf(" LIMIT %d OFFSET %d;", $page_size * $page_num, $page_size * ($page_num - 1));
+}
 
 // # create a table
 // R::store(R::dispense([
@@ -36,4 +51,3 @@ R::setup('mysql:host=localhost;dbname=geekland', 'root', 'root');
 // # delete data
 //R::trash($item);
 // R::wipe('post');
-?>

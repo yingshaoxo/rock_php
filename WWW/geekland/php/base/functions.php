@@ -1,5 +1,3 @@
-
-
 <?php
 // for php page
 function alert($msg, $route_to = null)
@@ -37,6 +35,16 @@ function get_value($key, $object)
     }
 }
 
+function my_json_decode($the_string)
+{
+    return json_decode($the_string, true);
+}
+
+function my_json_encode($the_obj)
+{
+    return json_encode($the_obj);
+}
+
 
 // for restful api
 function return_data($data)
@@ -59,5 +67,3 @@ function return_error($e)
     print(json_encode($data));
     exit();
 }
-
-?>
