@@ -25,15 +25,32 @@ const data = reactive({
 });
 
 const functions = reactive({
-  refresh: async () => {
-    data.message_list = await api.get_message_list(
-      page_size,
-      1
-    )
+  refresh: async (only_comments = false) => {
+    if (only_comments == false) {
+      data.message_list = await api.get_message_list(
+        page_size,
+        1
+      )
+    }
+
+    const selected_id = tempData.message_id_of_the_clicked_one
+    if (selected_id) {
+      let the_item = await api.get_message_by_id(selected_id);
+      data.current_selected_comments = []
+      if (the_item && the_item?.comments) {
+        for (const comment_id of JSON.parse(the_item?.comments)) {
+          data.current_selected_comments.push(
+            await api.get_message_by_id(comment_id)
+          )
+        }
+      }
+    }
   },
   create_message: async () => {
     await api.create_message(data.message_a, data.message_b)
     await functions.refresh();
+    data.message_a = ""
+    data.message_b = ""
   },
   get_more_messages: async () => {
     tempData.page_num += 1
@@ -50,26 +67,12 @@ const functions = reactive({
   },
   on_message_click: async (message_id: any) => {
     tempData.message_id_of_the_clicked_one = message_id;
-    let the_item = null
-    for (const item of data.message_list) {
-      // console.log(item?.id)
-      if (item?.id == message_id) {
-        the_item = item
-      }
-    }
-    // console.log(the_item, data.message_list, message_id)
-    data.current_selected_comments = []
-    if (the_item && the_item?.comments) {
-      for (const comment_id of JSON.parse(the_item?.comments)) {
-        data.current_selected_comments.push(
-          await api.get_message_by_id(comment_id)
-        )
-      }
-    }
+    await functions.refresh(true);
   },
   add_a_comment: async (message_id: string) => {
     await api.create_comment(data.comment_a, "", message_id)
-    await functions.refresh();
+    await functions.refresh(true);
+    data.comment_a = ""
   }
 })
 
@@ -189,15 +192,23 @@ onMounted(async () => {
             && tempData.message_id_of_the_clicked_one == item?.id
           " class="
           message_child_box
-          ml-[10px]
-          mt-[30px]
-          mr-[10px]
+          mx-[10px]
+          mt-[10px]
           mb-[20px]
+          border-[0.5px]
+          border-l-0
+          border-r-0
+          border-b-0
+          rounded-t-lg
+          px-[20px]
+          pt-[30px]
+          pb-[20px]
           ">
             <div class="
             the_reply_input_row
 
             flex flex-row
+            mb-[10px]
             ">
               <div class="
               flex flex-col
@@ -242,11 +253,33 @@ onMounted(async () => {
             the_comment_list
             w-full flex flex-col
             justify-center items-start
+            mt-[20px]
             ">
-              <div v-for="comment_item in data.current_selected_comments" class="flex flex-row justify-start
+              <div class="
+              one_comment
+
+              w-full
+              mt-[10px]
+              " v-for="(comment_item, index) in data.current_selected_comments">
+                <div class="
+                flex flex-row justify-start items-center
+                ">
+                  <div class="
+              devide_line
+
+              w-[50%] 
+              h-[0.5px]
+
+              mt-[10px]
+              mb-[10px]
+
+              bg-slate-300	
+              " v-if="index != 0"></div>
+                </div>
+                <div class="flex flex-row justify-start
               mt-[10px]
               ">
-                <div class="mr-[10px]
+                  <div class="mr-[10px]
                 the_circle_head
 
                 w-[50px] 
@@ -257,24 +290,25 @@ onMounted(async () => {
                 flex flex-col
                 justify-center items-center
                 ">
-                  {{ 'B' }}
-                </div>
-                <div class="
+                    {{ 'B' }}
+                  </div>
+                  <div class="
             ml-[10px]
                 ">
-                  <div class="
+                    <div class="
             message_head_info_row
             flex flex-row [&>*]:mr-2
             items-end
             ">
-                    <div class="text-[15px] font-medium">{{ item?.username }}</div>
-                    <!-- <div class="text-[14px]">username</div> -->
-                    <div class="">·</div>
-                    <div class="">{{ super_store.time.convert_timestamp_to_string(item?.date) }}</div>
-                  </div>
+                      <div class="text-[15px] font-medium">{{ item?.username }}</div>
+                      <!-- <div class="text-[14px]">username</div> -->
+                      <div class="">·</div>
+                      <div class="">{{ super_store.time.convert_timestamp_to_string(item?.date) }}</div>
+                    </div>
 
-                  <div>
-                    {{ comment_item?.public_message }}
+                    <div>
+                      {{ comment_item?.public_message }}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -299,7 +333,7 @@ onMounted(async () => {
 
 .message_child_box {
   .ant-input {
-    height: 70px !important;
+    height: 50px !important;
   }
 }
 </style>

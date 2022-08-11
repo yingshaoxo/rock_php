@@ -20,7 +20,8 @@ function create_a_message($username, $public_message, $private_message, $parent_
         if ($the_parent_message) {
             $comments_json_string = $the_parent_message->comments;
             $comments = my_json_decode($comments_json_string);
-            array_push($comments, $new_message_id);
+            // array_push($comments, $new_message_id);
+            array_unshift($comments, $new_message_id);
             $the_parent_message->comments = my_json_encode($comments);
             R::store($the_parent_message);
         }
