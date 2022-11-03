@@ -13,6 +13,7 @@ header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
 header('Access-Control-Max-Age: 1000');
 header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token , Authorization');
 
+
 // debug settings
 $development = true;
 if ($development) {
@@ -20,3 +21,11 @@ if ($development) {
         user_register(username: "default_user", password: "default_user");
     }
 }
+
+#try {
+#} catch (Exception $e) {
+#    return_error($e->getMessage());
+#    exit();
+#}
+
+

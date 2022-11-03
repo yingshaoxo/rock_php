@@ -1,6 +1,8 @@
 <?php
 require 'rb-mysql.php';
-R::setup('mysql:host=localhost;dbname=geekland', 'root', 'root');
+
+R::setup('mysql:host=db;dbname=geekland', 'root', '123456');
+#R::setup('mysql:host=141.002.009.163;dbname=geekland', 'root', '1256');
 
 function get_sql_offset_and_limit_command_by_using_pagesize_and_pagenum($page_size, $page_num)
 {

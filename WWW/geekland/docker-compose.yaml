@@ -1,0 +1,56 @@
+version: "3.9"
+
+services:
+  the_php_interpreter:
+    #image: trafex/php-nginx
+    #image: yingshaoxo/php-nginx-test
+    build: https://github.com/yingshaoxo/docker-php-nginx.git
+    ports:
+      - 3210:8080
+    volumes:
+      - ./:/var/www/html/geekland/
+  db:
+    image: mysql
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_DATABASE: geekland
+    volumes:
+      - ./test_data_folder/mysql:/var/lib/mysql
+
+  # nginx:
+  #   image: nginx:alpine
+  #   ports:
+  #     - 6000:80
+  #       #    volumes:
+  #       #      - ./test_data_folder/nginx/conf.d/:/etc/nginx/conf.d/
+  #   volumes:
+  #     - ./:/etc/nginx/templates/geekland
+  #   ports:
+  #    - "6000:80"
+  #   environment:
+  #    - NGINX_HOST=127.0.0.1
+  #    - NGINX_PORT=80
+
+  #  transmission:
+  #    image: linuxserver/transmission
+  #    container_name: transmission
+  #    environment:
+  #      - PUID=1000
+  #      - PGID=1000
+  #      - TZ=Europe/London
+  #      - TRANSMISSION_WEB_HOME=/combustion-release/ #optional
+  #      - USER=yingshaoxo #optional
+  #      - PASS=your_password #optional
+  #    volumes:
+  #      - /media/data/transmission/config:/config
+  #      - /media/data/transmission/downloads:/downloads
+  #      - /media/data/transmission/watch:/watch
+  #    ports:
+  #      - 9091:9091
+  #      - 51413:51413
+  #      - 51413:51413/udp
+  #    restart: unless-stopped

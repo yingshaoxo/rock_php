@@ -1,4 +1,1 @@
-<?php
-header('Location: ./php/index.php');
-exit;
-?>
+print("./php/home_page.php");
